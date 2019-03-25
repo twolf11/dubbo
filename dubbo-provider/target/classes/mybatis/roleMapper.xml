@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcy.dubbo.basic.mapper.RoleMapper">
+    <resultMap id="BaseResultMap" type="com.lcy.dubbo.basic.model.RoleMo">
+        <id column="ROLE_ID" jdbcType="VARCHAR" property="roleId"/>
+        <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName"/>
+        <result column="CTIME" property="ctime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        ROLE_ID
+        ,
+        ROLE_NAME,
+        CTIME
+    </sql>
+    <select id="getRoleById" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from basic_role
+        where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+    </select>
+    <delete id="delRoleById" parameterType="java.lang.String">
+        delete
+        from basic_role
+        where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="addRole" parameterType="com.lcy.dubbo.basic.model.RoleMo">
+        insert into basic_role (<include refid="Base_Column_List"/>)
+        values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{ctime}
+        )
+    </insert>
+    <update id="updateRoleById" parameterType="com.lcy.dubbo.basic.model.RoleMo">
+        update basic_role
+        set ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+            CTIME     = #{ctime}
+        where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+    </update>
+</mapper>

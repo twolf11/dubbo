@@ -1,0 +1,17 @@
+server:
+  port: 8086
+spring:
+  dubbo:
+    application:
+      name: consumer
+      timeout: 3000
+    registry:
+      address: zookeeper://192.168.56.66:2181
+    protocol:
+      port: 1234
+      name: dubbo-consumer
+    scan: com.lcy.dubbo.ctrl.basic
+  mvc:
+    view:
+      prefix: /basic/
+      suffix: .jsp
